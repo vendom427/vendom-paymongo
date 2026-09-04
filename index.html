@@ -102,10 +102,6 @@
   </p>
 
 
-  <!-- ================================= -->
-  <!-- PRODUCT SELECTION -->
-  <!-- ================================= -->
-
   <div id="products">
 
     <p id="loading">
@@ -114,10 +110,6 @@
 
   </div>
 
-
-  <!-- ================================= -->
-  <!-- PAYMENT -->
-  <!-- ================================= -->
 
   <div id="payment">
 
@@ -143,32 +135,32 @@
 
   <script>
 
-    // =================================
+     
     // CLOUDFLARE WORKER
-    // =================================
+     
 
     const WORKER_URL =
       "https://vendom-paymongo.vendom427.workers.dev";
 
 
-    // =================================
+     
     // FIREBASE DATABASE
-    // =================================
+     
 
     const FIREBASE_URL =
       "https://vendom-9757f-default-rtdb.asia-southeast1.firebasedatabase.app";
 
 
-    // =================================
+     
     // PRODUCT LIST
-    // =================================
+     
 
     let products = {};
 
 
-    // =================================
+     
     // LOAD PRODUCTS
-    // =================================
+     
 
     async function loadProducts() {
 
@@ -219,9 +211,9 @@
     }
 
 
-    // =================================
+     
     // DISPLAY PRODUCTS
-    // =================================
+     
 
     function displayProducts() {
 
@@ -284,9 +276,9 @@
     }
 
 
-    // =================================
+     
     // CREATE PAYMENT
-    // =================================
+     
 
     async function createPayment(
       productId
@@ -294,7 +286,6 @@
 
       try {
 
-        // Hide product list
 
         document.getElementById(
           "products"
@@ -331,11 +322,8 @@
         ).style.display =
           "none";
 
-
-        // =================================
-        // STEP 1
         // CREATE PAYMENT
-        // =================================
+         
 
         const createResponse =
           await fetch(
@@ -380,9 +368,9 @@
         }
 
 
-        // =================================
+         
         // PRODUCT
-        // =================================
+         
 
         const product =
           createData.product;
@@ -400,9 +388,9 @@
           "₱" + product.price;
 
 
-        // =================================
+         
         // PAYMENT INTENT
-        // =================================
+         
 
         const paymentIntent =
           createData.data;
@@ -416,10 +404,8 @@
           paymentIntent.attributes.client_key;
 
 
-        // =================================
-        // STEP 2
         // ATTACH QR
-        // =================================
+         
 
         const attachResponse =
           await fetch(
@@ -467,20 +453,17 @@
         }
 
 
-        // =================================
-        // STEP 3
         // GET QR IMAGE
-        // =================================
+         
 
         const qrImage =
           attachData.data.attributes
             .next_action.code.image_url;
 
 
-        // =================================
-        // STEP 4
+        
         // DISPLAY QR
-        // =================================
+         
 
         document.getElementById(
           "qr"
@@ -500,10 +483,9 @@
           "Scan this QR code to pay.";
 
 
-        // =================================
-        // STEP 5
+        
         // CHECK PAYMENT
-        // =================================
+         
 
         const checkPayment =
           setInterval(
@@ -548,9 +530,9 @@
                 );
 
 
-                // =================================
+                 
                 // PAYMENT SUCCESS
-                // =================================
+                 
 
                 if (
                   status === "succeeded"
@@ -618,9 +600,9 @@
     }
 
 
-    // =================================
+     
     // RETURN TO PRODUCT LIST
-    // =================================
+     
 
     function showProducts() {
 
@@ -656,9 +638,9 @@
     }
 
 
-    // =================================
+     
     // START
-    // =================================
+     
 
     loadProducts();
 
